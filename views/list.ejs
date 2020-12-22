@@ -1,24 +1,17 @@
-<!DOCTYPE html>
-    <head>
-        <meta charset="utf8">
-        <title>To Do List</title>
-    </head>
-    <body>
-        <h1>It's a <%= kindOfDay %></h1>
-
-        <ul>
-        <% 
-        for (let index = 0; index < listItems.length; index++) {
-            const element = listItems[index];%>
-         <li><%= element %></li>
-        <%}%> 
-           
-        </ul>
-
-        <form class="" action="/" method="post">
-            <input type="text" name="newItem"/>
-            <button type="submit" name="button"></button>
-        </form>
-        
-    </body>
-</html>
+<%- include("header"); -%> 
+        <div class="box" id="heading">
+            <h1>It's a <%= kindOfDay %></h1>
+        </div>
+        <div class="box" >
+            <% for (let index = 0; index < listItems.length; index++) { const element = listItems[index];%>
+                <div class="item">
+                    <input type="checkbox">
+                    <li><%= element %></li>
+                </div>
+            <%}%> 
+            <form class="item" action="/" method="post">
+                <input type="text" name="newItem" placeholder="New Item"/>
+                <button type="submit" name="button">+</button>
+            </form>
+        </div>
+<%- include("footer"); -%>  
