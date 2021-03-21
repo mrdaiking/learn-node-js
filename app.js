@@ -9,6 +9,7 @@ const PORT = 3000;
 
 
 const app = express();
+const port = 5000;
 
 const items = ["Banana", "Orange", "Apple"];
 const workItems = [];
