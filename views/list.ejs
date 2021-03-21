@@ -2,23 +2,28 @@
     <head>
         <meta charset="utf8">
         <title>To Do List</title>
+        <link rel="stylesheet" href="css/styles.css">
     </head>
     <body>
-        <h1>It's a <%= kindOfDay %></h1>
-
-        <ul>
-        <% 
-        for (let index = 0; index < listItems.length; index++) {
-            const element = listItems[index];%>
-         <li><%= element %></li>
-        <%}%> 
-           
-        </ul>
-
-        <form class="" action="/" method="post">
-            <input type="text" name="newItem"/>
-            <button type="submit" name="button"></button>
-        </form>
-        
+        <div class="box" id="heading">
+            <h1>It's a <%= listTitle %></h1>
+        </div>
+        <div class="box">
+                <%  newListItems&&newListItems.forEach(function(item) {%>
+                    <% console.log(item._id) %> 
+                    <form action="/delete" method="post">
+                        <div class="item">
+                            <input type="checkbox" name="checkbox" value=<%= item._id %> onChange="this.form.submit()"> 
+                            <p><%= item.name %></p>
+                        </div>
+                        <input type="hidden" name="listName" value="<%= listTitle %> "></input>
+                    </form>
+                <% }); %> 
+                
+            <form class="" action="/" method="post">
+                <input type="text" name="newItem" placeholder="New Item"/>
+                <button type="submit" name="list" value="<%= listTitle %>"" >+</button>
+            </form>
+        </div>
     </body>
 </html>
