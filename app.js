@@ -9,18 +9,25 @@ const PORT = 3000;
 
 
 const app = express();
-const port = 5000;
 
 const items = ["Banana", "Orange", "Apple"];
 const workItems = [];
+
+const url = "mongodb+srv://admin_daiking:test123@cluster0.6zfyk.mongodb.net/todolistDB"
 
 app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
+
+
 //Connect database by mongoose
-mongoose.connect("mongodb://localhost:27017/todolistDB", {useNewUrlParser: true});
+mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true}).then(function(res){
+    console.log("--Connected MongoDB Server Success",res)
+}).catch(function(err){
+    console.log("ERROR CONNECT", err)
+});
 
 
 //Create schema like a table in database
@@ -162,6 +169,12 @@ app.get("/about", function(req, res){
     res.render("about", {startingContent: "About content"});
 });
 
-app.listen(PORT,  function(){
-    console.log("Server started on port : ", PORT);
+//Port setting on Heroku
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 3000;
+}
+
+app.listen(port,  function(){
+    console.log("Server started in Heroku on port : ", port);
 });
